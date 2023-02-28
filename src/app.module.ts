@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Training } from './training/training.entity';
 import { TrainingModule } from './training/training.module';
+import { ExerciseModule } from './exercise/exercise.module';
+import { Exercise } from './exercise/exercise.entity';
 
 @Module({
   imports: [
@@ -14,10 +16,11 @@ import { TrainingModule } from './training/training.module';
       username: 'root',
       password: '',
       database: 'summit',
-      entities: [Training],
+      entities: [Training, Exercise],
       synchronize: true
     }),
-    TrainingModule
+    TrainingModule,
+    ExerciseModule
   ],
   controllers: [AppController],
   providers: [AppService]

@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Training } from './training.entity';
 import { type QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
+
 @Injectable()
 export class TrainingService {
   constructor(
