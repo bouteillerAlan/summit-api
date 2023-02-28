@@ -15,11 +15,11 @@ import { TrainingModule } from './training/training.module';
       password: '',
       database: 'summit',
       entities: [Training],
-      synchronize: true,
+      synchronize: true
     }),
-    TrainingModule,
+    TrainingModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
 export class AppModule {}
