@@ -1,14 +1,33 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class GetTrainingDto {
-    @ApiProperty()
-    id: number;
+  @ApiProperty() id: number;
 }
 
 export class CreateTrainingDto {
-    @ApiProperty()
-    name: string;
+  /* link */
+  @ApiProperty() owner: string; /* todo id */
+  @ApiProperty() type: string; /* todo id */
 
-    @ApiProperty()
-    type: string;
+  /* identity data */
+  @ApiProperty() name: string;
+  @ApiProperty() date: Date;
+
+  /* planned data */
+  @ApiPropertyOptional() plannedDistance?: number;
+  @ApiPropertyOptional() plannedDuration?: number;
+  @ApiPropertyOptional() plannedPace?: number;
+  @ApiPropertyOptional() plannedCalorie?: number;
+
+  /* current data */
+  @ApiPropertyOptional() distance?: number;
+  @ApiPropertyOptional() duration?: number;
+  @ApiPropertyOptional() pace?: number;
+  @ApiPropertyOptional() calorie?: number;
+
+  /* additional data */
+  @ApiPropertyOptional() note?: string;
+  @ApiPropertyOptional() postActivityNote?: string;
+  @ApiPropertyOptional() perceivedExertion?: number;
+  @ApiPropertyOptional() feeling?: number;
 }
