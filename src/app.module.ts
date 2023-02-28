@@ -6,6 +6,8 @@ import { Training } from './training/training.entity';
 import { TrainingModule } from './training/training.module';
 import { ExerciseModule } from './exercise/exercise.module';
 import { Exercise } from './exercise/exercise.entity';
+import { ExerciseType } from './exerciseType/exerciseType.entity';
+import { ExerciseTypeModule } from './exerciseType/exerciseType.module';
 
 @Module({
   imports: [
@@ -16,11 +18,12 @@ import { Exercise } from './exercise/exercise.entity';
       username: 'root',
       password: '',
       database: 'summit',
-      entities: [Training, Exercise],
+      entities: [Training, Exercise, ExerciseType],
       synchronize: true
     }),
     TrainingModule,
-    ExerciseModule
+    ExerciseModule,
+    ExerciseTypeModule
   ],
   controllers: [AppController],
   providers: [AppService]
