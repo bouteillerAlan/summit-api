@@ -4,17 +4,27 @@ import { ExerciseType } from '../exerciseType/exerciseType.entity';
 
 @Entity()
 export class Exercise {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   /* link */
-  @ManyToOne(type => ExerciseType, exerciseType => exerciseType.id) type: number;
-  @ManyToOne(type => Training, training => training.id) training: number;
+  @ManyToOne(type => ExerciseType, exerciseType => exerciseType.id)
+  type: number;
+
+  @ManyToOne(type => Training, training => training.id)
+  training: number;
 
   /* current data */
-  @Column({ type: 'int' }) weight: number;
-  @Column({ type: 'int' }) repetition: number;
-  @Column({ type: 'int' }) series: number;
+  @Column({ type: 'int' })
+  weight: number;
+
+  @Column({ type: 'int' })
+  repetition: number;
+
+  @Column({ type: 'int' })
+  series: number;
 
   /* additional data */
-  @Column({ type: 'varchar' }) note: string;
+  @Column({ type: 'varchar' })
+  note: string;
 }

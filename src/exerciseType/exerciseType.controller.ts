@@ -4,8 +4,8 @@ import { type ExerciseType } from './exerciseType.entity';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateExerciseTypeDto, GetExerciseTypeDto } from './exerciseType.dto';
 
-@ApiTags('ExerciseType')
-@Controller('ExerciseType')
+@ApiTags('exerciseType')
+@Controller('exerciseType')
 export class ExerciseTypeController {
   constructor(private readonly exerciseTypeService: ExerciseTypeService) {}
 
