@@ -23,6 +23,7 @@
         "@typescript-eslint/semi": 0,
         "@typescript-eslint/space-before-function-paren": 0,
         "@typescript-eslint/return-await": 0,
-        "@typescript-eslint/no-explicit-any": "error"
+        "@typescript-eslint/no-explicit-any": "error",
+        "jsdoc/newline-after-description": 0
     }
 }
