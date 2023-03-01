@@ -5,5 +5,6 @@ export class ExerciseType {
   @PrimaryGeneratedColumn() id: number;
 
   /* identity data */
-  @Column({ type: 'varchar' }) name: string;
+  @Column({ type: 'varchar', unique: true })
+  name: string;
 }

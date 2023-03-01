@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Post } from '@nestjs/common';
 import { ExerciseTypeService } from './exerciseType.service';
 import { type ExerciseType } from './exerciseType.entity';
 import { ApiTags } from '@nestjs/swagger';
@@ -15,8 +15,10 @@ export class ExerciseTypeController {
   }
 
   @Get(':id')
-  async getOneExerciseType(@Param() params: GetExerciseTypeDto): Promise<ExerciseType | null> {
-    return this.exerciseTypeService.findOne(params.id);
+  async getOneExerciseType(@Param() params: GetExerciseTypeDto): Promise<ExerciseType> {
+    const exerciseType = await this.exerciseTypeService.findOne(params.id);
+    if (exerciseType === null) throw new NotFoundException();
+    return exerciseType;
   }
 
   @Post()

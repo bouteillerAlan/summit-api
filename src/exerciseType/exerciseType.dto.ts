@@ -1,10 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class GetExerciseTypeDto {
-  @ApiProperty() id: number;
+  @ApiProperty() @IsNotEmpty() @IsNumber()
+  id: number;
 }
 
 export class CreateExerciseTypeDto {
   /* identity data */
-  @ApiProperty() name: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  name: string;
 }
