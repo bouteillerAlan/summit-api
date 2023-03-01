@@ -16,7 +16,8 @@ import { ExerciseTypeModule } from './exerciseType/exerciseType.module';
       password: '',
       database: 'summit',
       autoLoadEntities: true,
-      synchronize: true
+      synchronize: true,
+      logging: ['error']
     }),
     TrainingModule,
     ExerciseModule,
@@ -25,4 +26,5 @@ import { ExerciseTypeModule } from './exerciseType/exerciseType.module';
   controllers: [AppController],
   providers: [AppService]
 })
+
 export class AppModule {}
