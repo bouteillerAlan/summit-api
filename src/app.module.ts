@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TrainingModule } from './training/training.module';
 import { ExerciseModule } from './exercise/exercise.module';
 import { ExerciseTypeModule } from './exerciseType/exerciseType.module';
+import { TrainingTypeModule } from './trainingType/trainingType.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ExerciseTypeModule } from './exerciseType/exerciseType.module';
       logging: ['error']
     }),
     TrainingModule,
+    TrainingTypeModule,
     ExerciseModule,
     ExerciseTypeModule
   ],
