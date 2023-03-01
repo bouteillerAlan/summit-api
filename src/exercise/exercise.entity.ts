@@ -1,12 +1,14 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Training } from '../training/training.entity';
+import { ExerciseType } from '../exerciseType/exerciseType.entity';
 
 @Entity()
 export class Exercise {
   @PrimaryGeneratedColumn() id: number;
 
   /* link */
-  @Column({ type: 'varchar' }) type: string; /* todo id */
-  @Column({ type: 'varchar' }) training: string; /* todo id */
+  @ManyToOne(type => ExerciseType, exerciseType => exerciseType.id) type: number;
+  @ManyToOne(type => Training, training => training.id) training: number;
 
   /* current data */
   @Column({ type: 'int' }) weight: number;

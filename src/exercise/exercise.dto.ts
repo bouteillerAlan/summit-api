@@ -6,28 +6,14 @@ export class GetExerciseDto {
 
 export class CreateExerciseDto {
   /* link */
-  @ApiProperty() owner: string; /* todo id */
-  @ApiProperty() type: string; /* todo id */
-
-  /* identity data */
-  @ApiProperty() name: string;
-  @ApiProperty() date: Date;
-
-  /* planned data */
-  @ApiPropertyOptional() plannedDistance?: number;
-  @ApiPropertyOptional() plannedDuration?: number;
-  @ApiPropertyOptional() plannedPace?: number;
-  @ApiPropertyOptional() plannedCalorie?: number;
+  @ApiProperty() training: number;
+  @ApiProperty() type: number;
 
   /* current data */
-  @ApiPropertyOptional() distance?: number;
-  @ApiPropertyOptional() duration?: number;
-  @ApiPropertyOptional() pace?: number;
-  @ApiPropertyOptional() calorie?: number;
+  @ApiProperty() weight: number;
+  @ApiProperty() repetition: number;
+  @ApiProperty() series: number;
 
   /* additional data */
   @ApiPropertyOptional() note?: string;
-  @ApiPropertyOptional() postActivityNote?: string;
-  @ApiPropertyOptional() perceivedExertion?: number;
-  @ApiPropertyOptional() feeling?: number;
 }
