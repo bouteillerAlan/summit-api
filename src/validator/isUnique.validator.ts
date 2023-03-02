@@ -41,7 +41,7 @@ export class IsUniqueClass implements ValidatorConstraintInterface {
   async validate(value: unknown, args: ValidationArguments): Promise<boolean> {
     // todo make it generic
     // console.log('validator args >>>>>>>>>> ', { value, args });
-    const r = await this.exerciseTypeRepository.find({ where: { name: value as string } });
+    // const r = await this.exerciseTypeRepository.find({ where: { name: value as string } });
     return false;
   }
 

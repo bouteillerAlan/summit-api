@@ -25,6 +25,6 @@ export class Exercise {
   series: number;
 
   /* additional data */
-  @Column({ type: 'varchar' })
+  @Column({ type: 'longtext', nullable: true })
   note: string;
 }

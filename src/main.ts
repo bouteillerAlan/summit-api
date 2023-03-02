@@ -10,8 +10,10 @@ import { useContainer } from 'class-validator';
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
 
-  // whitelist: removes all properties of a request’s body which are not in the DTO
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true,
+    forbidUnknownValues: true
+  }));
 
   // for custom decorator in class validator
   useContainer(app.select(AppModule), { fallbackOnErrors: true });

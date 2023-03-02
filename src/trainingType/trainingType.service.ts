@@ -1,8 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { TrainingType } from './trainingType.entity';
-import { type QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
+import { type CreateTrainingTypeDto } from './trainingType.dto';
 
 @Injectable()
 export class TrainingTypeService {
@@ -10,6 +10,10 @@ export class TrainingTypeService {
     @InjectRepository(TrainingType)
     private readonly trainingTypeRepository: Repository<TrainingType>
   ) {}
+
+  private generateCode (name: string): string {
+    return name.slice(0, 3).toUpperCase();
+  }
 
   async findAll(): Promise<TrainingType[]> {
     return this.trainingTypeRepository.find();
@@ -19,11 +23,8 @@ export class TrainingTypeService {
     return this.trainingTypeRepository.findOneBy({ id });
   }
 
-  async addOne(trainingType: QueryDeepPartialEntity<TrainingType>): Promise<void> {
-    if (trainingType.name === undefined) throw new BadRequestException('no training type name given');
-    const name: string = trainingType.name as string;
-    const code = name.slice(0, 3).toUpperCase();
-    await this.trainingTypeRepository.insert({ ...trainingType, code });
+  async addOne (trainingType: CreateTrainingTypeDto): Promise<void> {
+    await this.trainingTypeRepository.insert({ ...trainingType, code: this.generateCode(trainingType.name) });
   }
 
   async deleteOne(id: number): Promise<void> {

@@ -6,9 +6,6 @@ export class ExerciseType {
   id: number;
 
   /* identity data */
-  @Column({ type: 'varchar', unique: false }) // todo unique false > awaiting the validator for the dto
+  @Column({ type: 'varchar', unique: true })
   name: string;
-
-  @Column({ type: 'varchar' })
-  code: string;
 }

@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { TrainingType } from '../trainingType/trainingType.entity';
+import { feelingEnum, perceivedExertionEnum } from './training.enum';
 
 @Entity()
 export class Training {
@@ -7,11 +8,11 @@ export class Training {
   id: number;
 
   /* link */
-  @Column({ type: 'varchar' })
-  owner: string; /* todo id */
+  @Column({ type: 'int' })
+  owner: number;
 
   @ManyToOne(type => TrainingType, trainingType => trainingType.id)
-  type: string;
+  trainingType: number;
 
   /* identity data */
   @Column({ type: 'varchar' })
@@ -47,15 +48,15 @@ export class Training {
   calorie: number;
 
   /* additional data */
-  @Column({ type: 'varchar' })
+  @Column({ type: 'longtext' })
   note: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'longtext' })
   postActivityNote: string;
 
-  @Column({ type: 'int' })
-  perceivedExertion: number;
+  @Column({ type: 'enum', enum: perceivedExertionEnum })
+  perceivedExertion: perceivedExertionEnum;
 
-  @Column({ type: 'int' })
-  feeling: number;
+  @Column({ type: 'enum', enum: feelingEnum })
+  feeling: feelingEnum;
 }

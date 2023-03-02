@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Exercise } from './exercise.entity';
-import { type QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
+import { type CreateExerciseDto } from './exercise.dto';
 
 @Injectable()
 export class ExerciseService {
@@ -19,7 +19,7 @@ export class ExerciseService {
     return this.exerciseRepository.findOneBy({ id });
   }
 
-  async addOne(exercise: QueryDeepPartialEntity<Exercise>): Promise<void> {
+  async addOne (exercise: CreateExerciseDto): Promise<void> {
     await this.exerciseRepository.insert(exercise);
   }
 

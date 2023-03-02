@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import { trainingTypeEnum } from './trainingType.enum';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class GetTrainingTypeDto {
   @ApiProperty()
@@ -11,9 +10,10 @@ export class GetTrainingTypeDto {
 
 export class CreateTrainingTypeDto {
   /* identity data */
-  @ApiProperty({ enum: trainingTypeEnum })
-  @IsEnum(trainingTypeEnum)
-  name: trainingTypeEnum;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  name: string;
 
   @ApiProperty()
   @IsNotEmpty()
