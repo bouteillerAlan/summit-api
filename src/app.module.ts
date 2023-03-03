@@ -6,6 +6,8 @@ import { TrainingModule } from './training/training.module';
 import { ExerciseModule } from './exercise/exercise.module';
 import { ExerciseTypeModule } from './exerciseType/exerciseType.module';
 import { TrainingTypeModule } from './trainingType/trainingType.module';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { TrainingTypeModule } from './trainingType/trainingType.module';
       synchronize: true,
       logging: ['error']
     }),
+    AuthModule,
+    UserModule,
     TrainingModule,
     TrainingTypeModule,
     ExerciseModule,
