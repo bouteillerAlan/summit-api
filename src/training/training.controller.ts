@@ -3,9 +3,12 @@ import { TrainingService } from './training.service';
 import { type Training } from './training.entity';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateTrainingDto, GetTrainingDto } from './training.dto';
+import { Role } from '../auth/role/role.decorator';
+import { RoleEnum } from '../auth/role/role.enum';
 
 @ApiTags('training')
 @Controller('training')
+@Role(RoleEnum.user)
 export class TrainingController {
   constructor(private readonly trainingService: TrainingService) {}
 
