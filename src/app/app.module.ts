@@ -2,12 +2,12 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TrainingModule } from './training/training.module';
-import { ExerciseModule } from './exercise/exercise.module';
-import { ExerciseTypeModule } from './exerciseType/exerciseType.module';
-import { TrainingTypeModule } from './trainingType/trainingType.module';
-import { UserModule } from './user/user.module';
-import { AuthModule } from './auth/auth.module';
+import { TrainingModule } from '../training/training.module';
+import { ExerciseModule } from '../exercise/exercise.module';
+import { ExerciseTypeModule } from '../exerciseType/exerciseType.module';
+import { TrainingTypeModule } from '../trainingType/trainingType.module';
+import { UserModule } from '../user/user.module';
+import { AuthModule } from '../auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
