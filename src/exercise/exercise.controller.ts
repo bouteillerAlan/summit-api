@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Request } from '@nestjs/common';
 import { ExerciseService } from './exercise.service';
 import { type Exercise } from './exercise.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateExerciseDto, GetExerciseDto } from './exercise.dto';
 import { Role } from '../auth/role/role.decorator';
 import { RoleEnum } from '../auth/role/role.enum';
@@ -10,6 +10,7 @@ import { JwtRequest } from '../auth/jwt/jwtRequest.type';
 @ApiTags('exercise')
 @Controller('exercise')
 @Role(RoleEnum.user)
+@ApiBearerAuth()
 export class ExerciseController {
   constructor(private readonly exerciseService: ExerciseService) {}
 

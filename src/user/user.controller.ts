@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, NotFoundException, Post, Request } from '@nestjs/common';
 import { UserService } from './user.service';
 import { type User } from './user.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto, GetUserDto } from './user.dto';
 import { Role } from '../auth/role/role.decorator';
 import { RoleEnum } from '../auth/role/role.enum';
@@ -11,6 +11,7 @@ import { JwtRequest } from '../auth/jwt/jwtRequest.type';
 @ApiTags('user')
 @Controller('user')
 @Role(RoleEnum.administrator)
+@ApiBearerAuth()
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -28,7 +29,7 @@ export class UserController {
     return userWithoutPassword;
   }
 
-  @Post('signing')
+  @Post()
   @IsPublic()
   async addUser(@Body() createUserDto: CreateUserDto): Promise<void> {
     return this.userService.addOne(createUserDto);

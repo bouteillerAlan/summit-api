@@ -18,13 +18,15 @@ async function bootstrap(): Promise<void> {
   // for custom decorator in class validator
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
+  // swagger configuration and options
   const config = new DocumentBuilder()
     .setTitle('Summit')
-    .setDescription('Summit api')
+    .setDescription('The Summit nestjs main api')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document, {
+  SwaggerModule.setup('swag', app, document, {
     swaggerOptions: {
       docExpansion: 'none',
       displayRequestDuration: true,
@@ -37,10 +39,6 @@ async function bootstrap(): Promise<void> {
 
 /* eslint-disable no-console */
 bootstrap()
-  .then((): void => {
-    console.log('started');
-  })
-  .catch(e => {
-    console.log('error', e);
-  });
+  .then((): void => { console.log('started'); })
+  .catch(e => { console.log('error', e); });
 /* eslint-enable no-console */
