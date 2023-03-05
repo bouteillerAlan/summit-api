@@ -22,41 +22,41 @@ export class Training {
   date: Date;
 
   /* planned data */
-  @Column({ type: 'float' })
-  plannedDistance: number;
+  @Column({ type: 'float', nullable: true })
+  plannedDistance?: number;
 
-  @Column({ type: 'int' })
-  plannedDuration: number;
+  @Column({ type: 'int', nullable: true })
+  plannedDuration?: number;
 
-  @Column({ type: 'float' })
-  plannedPace: number;
+  @Column({ type: 'float', nullable: true })
+  plannedPace?: number;
 
-  @Column({ type: 'int' })
-  plannedCalorie: number;
+  @Column({ type: 'int', nullable: true })
+  plannedCalorie?: number;
 
   /* current data */
-  @Column({ type: 'float' })
-  distance: number;
+  @Column({ type: 'float', nullable: true })
+  distance?: number;
 
-  @Column({ type: 'int' })
-  duration: number;
+  @Column({ type: 'int', nullable: true })
+  duration?: number;
 
-  @Column({ type: 'float' })
-  pace: number;
+  @Column({ type: 'float', nullable: true })
+  pace?: number;
 
-  @Column({ type: 'int' })
-  calorie: number;
+  @Column({ type: 'int', nullable: true })
+  calorie?: number;
 
   /* additional data */
-  @Column({ type: 'longtext' })
-  note: string;
+  @Column({ type: 'longtext', nullable: true })
+  note?: string;
 
-  @Column({ type: 'longtext' })
-  postActivityNote: string;
+  @Column({ type: 'longtext', nullable: true })
+  postActivityNote?: string;
 
-  @Column({ type: 'enum', enum: perceivedExertionEnum })
-  perceivedExertion: perceivedExertionEnum;
+  @Column({ type: 'enum', enum: perceivedExertionEnum, nullable: true })
+  perceivedExertion?: perceivedExertionEnum;
 
   @Column({ type: 'enum', enum: feelingEnum })
-  feeling: feelingEnum;
+  feeling?: feelingEnum;
 }

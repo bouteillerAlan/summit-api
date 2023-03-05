@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Training } from './training.entity';
-import { type CreateTrainingDto } from './training.dto';
 
 @Injectable()
 export class TrainingService {
@@ -11,15 +10,23 @@ export class TrainingService {
     private readonly trainingRepository: Repository<Training>
   ) {}
 
-  async findAll(): Promise<Training[]> {
-    return this.trainingRepository.find();
+  async exist(whereOption: Record<string, string | number>): Promise<boolean> {
+    return this.trainingRepository.exist({ where: whereOption });
   }
 
-  async findOne(id: number): Promise<Training | null> {
-    return this.trainingRepository.findOneBy({ id });
+  async findAll(userId?: number): Promise<Training[]> {
+    const query: Record<string, number> = {};
+    if (userId !== undefined) query.owner = userId;
+    return this.trainingRepository.findBy(query);
   }
 
-  async addOne (training: CreateTrainingDto): Promise<void> {
+  async findOne(id: number, userId?: number): Promise<Training | null> {
+    const query: Record<string, number> = { id };
+    if (userId !== undefined) query.owner = userId;
+    return this.trainingRepository.findOneBy(query);
+  }
+
+  async addOne (training: Omit<Training, 'id'>): Promise<void> {
     await this.trainingRepository.insert(training);
   }
 
