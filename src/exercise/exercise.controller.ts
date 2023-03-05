@@ -20,7 +20,9 @@ export class ExerciseController {
 
   @Get(':id')
   async getOneExercise(@Param() params: GetExerciseDto, @Request() req: JwtRequest): Promise<Exercise | null> {
-    return this.exerciseService.findOne(params.id, parseInt(req.user.userId));
+    const exercise = await this.exerciseService.findOne(params.id, parseInt(req.user.userId));
+    if (exercise === null) throw new NotFoundException();
+    return exercise;
   }
 
   @Post()
