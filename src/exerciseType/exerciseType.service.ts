@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ExerciseType } from './exerciseType.entity';
-import { type CreateExerciseTypeDto } from './exerciseType.dto';
 
 @Injectable()
 export class ExerciseTypeService {
@@ -11,15 +10,23 @@ export class ExerciseTypeService {
     private readonly exerciseTypeRepository: Repository<ExerciseType>
   ) {}
 
-  async findAll(): Promise<ExerciseType[]> {
-    return this.exerciseTypeRepository.find();
+  async exist(whereOption: Record<string, string | number>): Promise<boolean> {
+    return this.exerciseTypeRepository.exist({ where: whereOption });
   }
 
-  async findOne(id: number): Promise<ExerciseType | null> {
-    return this.exerciseTypeRepository.findOneBy({ id });
+  async findAll(userId?: number): Promise<ExerciseType[]> {
+    const query: Record<string, number> = {};
+    if (userId !== undefined) query.owner = userId;
+    return this.exerciseTypeRepository.findBy(query);
   }
 
-  async addOne (exerciseType: CreateExerciseTypeDto): Promise<void> {
+  async findOne(id: number, userId?: number): Promise<ExerciseType | null> {
+    const query: Record<string, number> = { id };
+    if (userId !== undefined) query.owner = userId;
+    return this.exerciseTypeRepository.findOneBy(query);
+  }
+
+  async addOne (exerciseType: Omit<ExerciseType, 'id'>): Promise<void> {
     await this.exerciseTypeRepository.insert(exerciseType);
   }
 
