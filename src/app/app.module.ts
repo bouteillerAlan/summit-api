@@ -8,6 +8,7 @@ import { ExerciseTypeModule } from '../exerciseType/exerciseType.module';
 import { TrainingTypeModule } from '../trainingType/trainingType.module';
 import { UserModule } from '../user/user.module';
 import { AuthModule } from '../auth/auth.module';
+import { HealthModule } from '../health/health.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
@@ -33,7 +34,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     TrainingModule,
     TrainingTypeModule,
     ExerciseModule,
-    ExerciseTypeModule
+    ExerciseTypeModule,
+    HealthModule
   ],
   controllers: [AppController],
   providers: [AppService]

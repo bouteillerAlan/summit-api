@@ -1,5 +1,4 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { HealthType } from '../health/health.entity';
 import { User } from '../user/user.entity';
 
 @Entity()
