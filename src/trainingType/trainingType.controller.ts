@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, NotFoundException, Param, Post } from '@nestjs/common';
 import { TrainingTypeService } from './trainingType.service';
 import { type TrainingType } from './trainingType.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateTrainingTypeDto, GetTrainingTypeDto } from './trainingType.dto';
 import { Role } from '../auth/role/role.decorator';
 import { RoleEnum } from '../auth/role/role.enum';
@@ -9,6 +9,7 @@ import { RoleEnum } from '../auth/role/role.enum';
 @ApiTags('trainingType')
 @Controller('trainingType')
 @Role(RoleEnum.administrator)
+@ApiBearerAuth()
 export class TrainingTypeController {
   constructor(private readonly trainingTypeService: TrainingTypeService) {}
 
