@@ -6,8 +6,8 @@ services:
     image: mariadb
     restart: always
     environment:
-      - MARIADB_USER=dev
-      - MARIADB_PASSWORD=dev
+      - MARIADB_USER=developer
+      - MARIADB_PASSWORD=developer
       - MARIADB_ROOT_PASSWORD=root
     volumes:
       - ~/Documents/db-data/mariadb:/var/lib/mysql
