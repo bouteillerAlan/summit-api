@@ -20,6 +20,7 @@
         "max-len": "off",
         "no-console": "error",
         "indent": ["error", 2],
+        "@typescript-eslint/indent": 0,
         "@typescript-eslint/semi": 0,
         "@typescript-eslint/space-before-function-paren": 0,
         "@typescript-eslint/return-await": 0,

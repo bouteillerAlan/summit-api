@@ -10,6 +10,7 @@ import { UserModule } from '../user/user.module';
 import { AuthModule } from '../auth/auth.module';
 import { HealthModule } from '../health/health.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { LoggerModule } from 'nestjs-pino';
 
 @Module({
   imports: [
@@ -28,6 +29,17 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         logging: ['error']
       }),
       inject: [ConfigService]
+    }),
+    LoggerModule.forRoot({
+      pinoHttp: {
+        level: process.env.NODE_ENV !== 'production' ? 'debug' : 'info',
+        transport: process.env.NODE_ENV !== 'production'
+          ? {
+            target: 'pino-pretty',
+            options: { colorize: true, levelFirst: true, translateTime: 'UTC:mm/dd/yyyy, h:MM:ss TT Z' }
+          }
+          : undefined
+      }
     }),
     AuthModule,
     UserModule,
