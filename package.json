@@ -1,10 +1,26 @@
 {
   "name": "summit-api",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
-  "private": true,
+  "version": "1.0.0",
+  "description": "API for the summit ecosystem",
+  "author": {
+    "name": "Alan <A2N> Bouteiller",
+    "email": "a2n.dev@pm.me",
+    "url": "https://github.com/bouteillerAlan"
+  },
   "license": "UNLICENSED",
+  "homepage": "https://github.com/bouteillerAlan/summit-api",
+  "bugs": {
+    "url": "https://github.com/bouteillerAlan/summit-api/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bouteillerAlan/summit-api.git"
+  },
+  "packageManager": "yarn@3.6.0",
+  "engines": {
+    "node": ">=18.16.0",
+    "yarn": ">=3.6.0"
+  },
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
