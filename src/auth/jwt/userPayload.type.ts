@@ -1,5 +1,5 @@
 export interface UserPayload {
-  userId: string
+  userId: number
   email: string
   role: number
   payload: Record<string, string>

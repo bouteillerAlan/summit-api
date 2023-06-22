@@ -2,8 +2,18 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsDateString, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { feelingEnum, perceivedExertionEnum } from './training.enum';
 
-export class GetTrainingDto {
-  @ApiProperty() id: number;
+export class GetTrainingByIdDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
+  id: number;
+}
+
+export class GetTrainingByDateDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsDateString()
+  date: string;
 }
 
 export class CreateTrainingDto {
