@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { type FindOperator, Like, Repository } from 'typeorm';
 import { Training } from './training.entity';
 
 @Injectable()
@@ -26,7 +26,21 @@ export class TrainingService {
     return this.trainingRepository.findOneBy(query);
   }
 
-  async addOne (training: Omit<Training, 'id'>): Promise<void> {
+  async findAllByDate(date: string, userId?: number, precise: boolean = false): Promise<Training[]> {
+    const query: Record<string, string | number | FindOperator<string>> = {};
+    if (userId !== undefined) query.owner = userId;
+
+    if (precise) { // if we want precise date just do the request
+      query.date = date;
+      return this.trainingRepository.findBy(query);
+    }
+
+    // in other case we want a like for the date
+    query.date = Like(date.slice(0, 10) + '%');
+    return this.trainingRepository.find({ where: query });
+  }
+
+  async addOne(training: Omit<Training, 'id'>): Promise<void> {
     await this.trainingRepository.insert(training);
   }
 
