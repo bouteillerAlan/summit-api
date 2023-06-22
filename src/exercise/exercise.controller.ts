@@ -16,24 +16,24 @@ export class ExerciseController {
 
   @Get()
   async getExercise(@Request() req: JwtRequest): Promise<Exercise[]> {
-    return this.exerciseService.findAll(parseInt(req.user.userId));
+    return this.exerciseService.findAll(req.user.userId);
   }
 
   @Get(':id')
   async getOneExercise(@Param() params: GetExerciseDto, @Request() req: JwtRequest): Promise<Exercise | null> {
-    const exercise = await this.exerciseService.findOne(params.id, parseInt(req.user.userId));
+    const exercise = await this.exerciseService.findOne(params.id, req.user.userId);
     if (exercise === null) throw new NotFoundException();
     return exercise;
   }
 
   @Post()
   async addExercise(@Body() createExerciseDto: CreateExerciseDto, @Request() req: JwtRequest): Promise<void> {
-    return this.exerciseService.addOne({ ...createExerciseDto, owner: parseInt(req.user.userId) });
+    return this.exerciseService.addOne({ ...createExerciseDto, owner: req.user.userId });
   }
 
   @Delete()
   async deleteExercise(@Body() deleteExerciseDto: GetExerciseDto, @Request() req: JwtRequest): Promise<void> {
-    const exerciseExist = await this.exerciseService.exist({ id: deleteExerciseDto.id, owner: parseInt(req.user.userId) });
+    const exerciseExist = await this.exerciseService.exist({ id: deleteExerciseDto.id, owner: req.user.userId });
     if (!exerciseExist) throw new NotFoundException();
     return this.exerciseService.deleteOne(deleteExerciseDto.id);
   }
