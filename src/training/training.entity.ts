@@ -57,6 +57,6 @@ export class Training {
   @Column({ type: 'enum', enum: perceivedExertionEnum, nullable: true })
   perceivedExertion?: perceivedExertionEnum;
 
-  @Column({ type: 'enum', enum: feelingEnum })
+  @Column({ type: 'enum', enum: feelingEnum, nullable: true })
   feeling?: feelingEnum;
 }
