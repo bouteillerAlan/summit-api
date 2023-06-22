@@ -13,15 +13,29 @@ export class RoleGuard implements CanActivate {
     return request.user;
   }
 
+  // todo - check why the handler doesn't have the data form the class when we check the role
   canActivate(context: ExecutionContext): boolean {
     // if the endpoint is public, let it pass
     // this code allow the use of the @IsPublic decorator and the setup of the role guard globally
     const isPublic = this.reflector.get<boolean>('isPublic', context.getHandler());
     if (isPublic) return true;
 
-    // get the role from the decorator
-    const answeredRole: number = this.reflector.get<number>('role', context.getHandler());
-    if (answeredRole === undefined) return false; // if no role defined throw unauthorized
+    // let's check the role from the decorator
+    let answeredRole;
+    // first from the function in the class
+    const answeredRoleHandler: number = this.reflector.get<number>('role', context.getHandler());
+
+    if (answeredRoleHandler === undefined) { // if the function in the class return nothing we check the class itself
+      const answeredRoleClass: number = this.reflector.get<number>('role', context.getClass());
+      // finally if both the handler and the class doesn't have a role defined we throw unauthorized
+      if (answeredRoleClass === undefined) {
+        return false;
+      } else {
+        answeredRole = answeredRoleClass;
+      }
+    } else {
+      answeredRole = answeredRoleHandler;
+    }
 
     // here the jwt is already validated via the jwt strategy,
     // so we pick the user via the request data and
