@@ -27,10 +27,8 @@ export class TrainingController {
   }
 
   @Get('d/:date')
-  async getAllTrainingByOneDay(@Param() params: GetTrainingByDateDto, @Request() req: JwtRequest): Promise<Training | null> {
-    const training = await this.trainingService.findAllByDate(params.date, req.user.userId);
-    if (training === null) throw new NotFoundException();
-    return training;
+  async getAllTrainingByOneDay(@Param() params: GetTrainingByDateDto, @Request() req: JwtRequest): Promise<Training[]> {
+    return await this.trainingService.findAllByDate(params.date, req.user.userId);
   }
 
   @Post()
