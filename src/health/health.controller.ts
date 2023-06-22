@@ -15,24 +15,24 @@ export class HealthController {
 
   @Get()
   async getHealth(@Request() req: JwtRequest): Promise<Health[]> {
-    return this.healthService.findAll(parseInt(req.user.userId));
+    return this.healthService.findAll(req.user.userId);
   }
 
   @Get(':id')
   async getOneHealth(@Param() params: GetHealthDto, @Request() req: JwtRequest): Promise<Health | null> {
-    const health = await this.healthService.findOne(params.id, parseInt(req.user.userId));
+    const health = await this.healthService.findOne(params.id, req.user.userId);
     if (health === null) throw new NotFoundException();
     return health;
   }
 
   @Post()
   async addHealth(@Body() createHealthDto: CreateHealthDto, @Request() req: JwtRequest): Promise<void> {
-    return this.healthService.addOne({ ...createHealthDto, owner: parseInt(req.user.userId) });
+    return this.healthService.addOne({ ...createHealthDto, owner: req.user.userId });
   }
 
   @Delete()
   async deleteHealth(@Body() deleteHealthDto: GetHealthDto, @Request() req: JwtRequest): Promise<void> {
-    const healthExist = await this.healthService.exist({ id: deleteHealthDto.id, owner: parseInt(req.user.userId) });
+    const healthExist = await this.healthService.exist({ id: deleteHealthDto.id, owner: req.user.userId });
     if (!healthExist) throw new NotFoundException();
     return this.healthService.deleteOne(deleteHealthDto.id);
   }
