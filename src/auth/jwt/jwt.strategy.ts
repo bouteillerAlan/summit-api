@@ -26,6 +26,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     const validatedUser = await this.authService.validateUserExistence(payload.email);
     if (validatedUser === null) throw new UnauthorizedException();
     // return the following json into request['user']
-    return { userId: payload.sub, email: payload.email, role: parseInt(payload.role), payload };
+    return { userId: validatedUser.id, email: validatedUser.email, role: validatedUser.role, payload };
   }
 }

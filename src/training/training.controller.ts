@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Request 
 import { TrainingService } from './training.service';
 import { type Training } from './training.entity';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { CreateTrainingDto, GetTrainingDto } from './training.dto';
+import { CreateTrainingDto, GetTrainingByDateDto, GetTrainingByIdDto } from './training.dto';
 import { Role } from '../auth/role/role.decorator';
 import { RoleEnum } from '../auth/role/role.enum';
 import { JwtRequest } from '../auth/jwt/jwtRequest.type';
@@ -16,24 +16,31 @@ export class TrainingController {
 
   @Get()
   async getTraining(@Request() req: JwtRequest): Promise<Training[]> {
-    return this.trainingService.findAll();
+    return this.trainingService.findAll(req.user.userId);
   }
 
   @Get(':id')
-  async getOneTraining(@Param() params: GetTrainingDto, @Request() req: JwtRequest): Promise<Training | null> {
-    const training = await this.trainingService.findOne(params.id);
+  async getOneTraining(@Param() params: GetTrainingByIdDto, @Request() req: JwtRequest): Promise<Training | null> {
+    const training = await this.trainingService.findOne(params.id, req.user.userId);
+    if (training === null) throw new NotFoundException();
+    return training;
+  }
+
+  @Get('d/:date')
+  async getAllTrainingByOneDay(@Param() params: GetTrainingByDateDto, @Request() req: JwtRequest): Promise<Training | null> {
+    const training = await this.trainingService.findAllByDate(params.date, req.user.userId);
     if (training === null) throw new NotFoundException();
     return training;
   }
 
   @Post()
   async addTraining(@Body() createTrainingDto: CreateTrainingDto, @Request() req: JwtRequest): Promise<void> {
-    return this.trainingService.addOne({ ...createTrainingDto, owner: parseInt(req.user.userId) });
+    return this.trainingService.addOne({ ...createTrainingDto, owner: req.user.userId });
   }
 
   @Delete()
-  async deleteTraining(@Body() deleteTrainingDto: GetTrainingDto, @Request() req: JwtRequest): Promise<void> {
-    const trainingExist = await this.trainingService.exist({ id: deleteTrainingDto.id, owner: parseInt(req.user.userId) });
+  async deleteTraining(@Body() deleteTrainingDto: GetTrainingByIdDto, @Request() req: JwtRequest): Promise<void> {
+    const trainingExist = await this.trainingService.exist({ id: deleteTrainingDto.id, owner: req.user.userId });
     if (!trainingExist) throw new NotFoundException();
     return this.trainingService.deleteOne(deleteTrainingDto.id);
   }
