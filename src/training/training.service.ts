@@ -27,17 +27,18 @@ export class TrainingService {
   }
 
   async findAllByDate(date: string, userId?: number, precise: boolean = false): Promise<Training[]> {
-    const query: Record<string, string | number | FindOperator<string>> = {};
+    const query: Record<string, string | string[] | number | FindOperator<string>> = {};
     if (userId !== undefined) query.owner = userId;
 
     if (precise) { // if we want precise date just do the request
       query.date = date;
+      query.relations = ['trainingType'];
       return this.trainingRepository.findBy(query);
     }
 
     // in other case we want a like for the date
     query.date = Like(date.slice(0, 10) + '%');
-    return this.trainingRepository.find({ where: query });
+    return this.trainingRepository.find({ where: query, relations: ['trainingType'] });
   }
 
   async addOne(training: Omit<Training, 'id'>): Promise<void> {

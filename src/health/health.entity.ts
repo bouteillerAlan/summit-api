@@ -15,5 +15,4 @@ export class Health {
 
   @Column({ type: 'datetime' })
   date: Date;
-
 }
