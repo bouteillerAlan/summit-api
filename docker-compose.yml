@@ -2,14 +2,18 @@ version: '3'
 
 services:
 
-  mariadb-latest:
-    image: mariadb
+  mariadb-lts:
+    image: mariadb:lts
     restart: always
+    #command: --init-file.sql /data/application/init.sql
     environment:
       - MARIADB_USER=developer
-      - MARIADB_PASSWORD=developer
+      - MARIADB_PASSWORD=secret
       - MARIADB_ROOT_PASSWORD=root
+      - MARIADB_DATABASE=summit
     volumes:
       - ~/Documents/db-data/mariadb:/var/lib/mysql
+      #- ./init.sql:/data/application/init.sql
     ports:
       - "3306:3306"
+
